@@ -1,0 +1,29 @@
+<h1>articles</h1>
+<h3>Tweet: <%= tweet %></h3>
+<h4>By: <%= author %></h4>
+
+<% results[0][0].forEach(function(ele) { %>
+    <% let newer = ele.toString().replace(/href="/, websites[0]) %>
+    <p>Breitbart: </p>
+    <p><a href="<%= newer %>"><%= newer %></a></p>
+<% }) %>
+<% results[1][0].forEach(function(ele) { %>
+    <% let newer = ele.toString().replace(/href="/, websites[1]) %>
+    <p>BBC: </p>
+    <p><a href="<%= newer %>"><%= newer %></a></p>
+<% }) %>
+<% results[2][0].forEach(function(ele) { %>
+    <% let newer = ele.toString().replace(/href="/, websites[2]) %>
+    <p>NYtimes: </p>
+    <p><a href="<%= newer %>"><%= newer %></a></p>
+<% }) %>
+<% results[3][0].forEach(function(ele) { %>
+    <% let newer = ele.toString().replace(/href="/, '') %>
+    <p>Infowars: </p>
+    <p><a href="<%= newer %>"><%= newer %></a></p>
+<% }) %>
+<% results[4][0].forEach(function(ele) { %>
+    <% let newer = ele.toString().replace(/href="/, websites[4]) %>
+    <p>Fox: </p>
+    <p><a href="<%= newer %>"><%= newer %></a></p>
+<% }) %>

@@ -66,6 +66,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static('static'));
 // middleware ended, app getting
 app.get('/', function(req, res) {
   res.render('index');

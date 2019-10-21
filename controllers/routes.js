@@ -19,13 +19,10 @@ const newsSites = [
 //     res.render('news/scraper')
 //     })
 
-router.post(`/results`, function(req, res) {
-    res.redirect('/compcoll/results')
-    console.log('---------------------------------------------------------')
-    console.log('post')
-})
-
-router.get('/results', function(req, res) {
+router.get('/displayarticles', function(req, res) {
+    console.log('-------------------------------------------------------------------------------')
+    console.log('req tweet: ' + req.query.tweet)
+    let searchstring = req.query.tweet.match(/Trump/)
     let newsName = 'breitbart';
     let async_One = function(cb) {
         axios.get(newsSites[0])
@@ -35,12 +32,12 @@ router.get('/results', function(req, res) {
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
                 checkerTitle.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         newsArray.push(ele);
                     }
                 })
@@ -58,12 +55,12 @@ router.get('/results', function(req, res) {
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
                 checkerTitle.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         newsArray.push(ele);
                     }
                 })
@@ -80,12 +77,12 @@ router.get('/results', function(req, res) {
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
                 checkerTitle.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         newsArray.push(ele);
                     }
                 })
@@ -102,12 +99,12 @@ router.get('/results', function(req, res) {
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
                 checkerTitle.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(req.query.inputtext)) {
+                    if (ele.includes(searchstring)) {
                         newsArray.push(ele);
                     }
                 })
@@ -124,12 +121,12 @@ router.get('/results', function(req, res) {
             let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
             let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
             checkerTitle.forEach(function(ele) {
-                if (ele.includes(req.query.inputtext)) {
+                if (ele.includes(searchstring)) {
                     titleArray.push(ele);
                 }
             })
             checkerHref.forEach(function(ele) {
-                if (ele.includes(req.query.inputtext)) {
+                if (ele.includes(searchstring)) {
                     newsArray.push(ele);
                 }
             })
@@ -138,15 +135,16 @@ router.get('/results', function(req, res) {
     }
 
     async.series([async_One, async_Two, async_Three, async_Four, async_Five], function(err, results) {
-        res.render('news/results', {
+        res.render('articles/displayarticles', {
             results : results,
             websites : newsSites,
+            tweet: req.query.tweet,
+            author: req.query.person
         })
         })
     })
 
     router.get('/displaytwitter', function(req, res) {
-        console.log(`https://twitter.com/${req.query.inputtext}`)
         axios.get(`https://twitter.com/${req.query.inputtext}`)
         .then(function(results) {
             let checkerSpan = results.data.match(/<p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text" lang="en" data-aria-label-part="0">(\w|.)[^<]*/g);
@@ -157,7 +155,7 @@ router.get('/results', function(req, res) {
             });
         }).catch(function(err) {
             console.log(err)
-            res.redirect('/searchtwitter')
+            res.redirect('/profile')
         })
     })
 
