@@ -1,0 +1,11 @@
+.alert-danger {
+    border: solid 3px red;
+}
+
+.alert-success {
+    border: solid 3px green;;
+}
+
+body {
+    background-color: aqua;
+}
