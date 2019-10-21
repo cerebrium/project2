@@ -22,20 +22,20 @@ app.use(ejsLayouts);
 app.use(helmet());
 
 // have ot make limiters
-const loginLimiter = new RateLimit({
-  windowMs: 1000 * 60 * 5,
-  max: 3,
-  message: 'Maximum Loggin Attempts EXCEEDid'
-});
+// const loginLimiter = new RateLimit({
+//   windowMs: 1000 * 60 * 5,
+//   max: 3,
+//   message: 'Maximum Loggin Attempts EXCEEDid'
+// });
 
-const signupLimiter = new RateLimit({
-  windowMs: 1000 * 60 * 60,
-  max: 3,
-  message: 'maximum amount of accounts reached'
-});
+// const signupLimiter = new RateLimit({
+//   windowMs: 1000 * 60 * 60,
+//   max: 3,
+//   message: 'maximum amount of accounts reached'
+// });
 
-app.use('/auth/login', loginLimiter);
-app.use('/auth/signup', signupLimiter)
+// app.use('/auth/login', loginLimiter);
+// app.use('/auth/signup', signupLimiter)
 
 const sessionStore = new SequelizeStore({
   db: db.sequelize,
