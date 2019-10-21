@@ -15,9 +15,9 @@ const newsSites = [
 // MY ASYNC DATA GATHERING
 
 ///////    Get Routes
-router.get(`/`, function(req, res) {
-    res.render('news/scraper')
-    })
+// router.get(`/`, function(req, res) {
+//     res.render('news/scraper')
+//     })
 
 router.post(`/results`, function(req, res) {
     res.redirect('/compcoll/results')
@@ -145,10 +145,6 @@ router.get('/results', function(req, res) {
         })
     })
 
-    router.get('/searchtwitter', function(req, res) {
-        res.render('twitter/searchtwitter')
-    })
-
     router.get('/displaytwitter', function(req, res) {
         console.log(`https://twitter.com/${req.query.inputtext}`)
         axios.get(`https://twitter.com/${req.query.inputtext}`)
@@ -161,7 +157,7 @@ router.get('/results', function(req, res) {
             });
         }).catch(function(err) {
             console.log(err)
-            res.redirect('/compcoll/searchtwitter')
+            res.redirect('/searchtwitter')
         })
     })
 

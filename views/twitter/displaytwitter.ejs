@@ -1,0 +1,7 @@
+<h1>This is what the donald is saying right now</h1>
+
+<% results.forEach(function(ele) { %>
+<% let newer = ele.toString().replace(/<p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text" lang="en" data-aria-label-part="0">/, '') %>
+    <p><%= person %> Says: <%= newer %></p>
+<% }) %>
+
