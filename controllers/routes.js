@@ -162,25 +162,24 @@ router.get('/displayarticles', function(req, res) {
         })
     })
 
+    router.get('/favourites', function(req, res) {
+        res.render('favourites/favourites')
+    })
+
     router.post('/favourites', function(req, res) {
+        console.log(req.body)
         db.favourite.findOrCreate({
             where : {
-                tweet = name
+                tweet : req.body.tweet
             }
         })
         .then(function(favourite) {
-            favourite.createFavarticle({
-                where : {
-                    title : article
-                }
-            })
+            favourite.createFavarticle(req.body.article)
         }).then(function([tweet, created]) {
             created ? console.log(tweet) : console.log('already present')
+            res.redirect('/favourites')
         })
     })
 
-    router.get('/favourties', function(req, res) {
-        res.render('favourites/favourites')
-    })
 
 module.exports = router;

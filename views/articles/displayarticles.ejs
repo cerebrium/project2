@@ -2,7 +2,7 @@
 <h3>Tweet: <%= tweet %></h3>
 <h4>By: <%= author %></h4>
 <h5>Check to save article to tweet!</h5>
-<form action="compcoll/favourites" method="POST">
+<form action="/compcoll/favourites" method="POST">
     <input type="hidden" name="tweet" value="<%= tweet %>">
 
 <% results[0][1].forEach(function(ele) { %>
