@@ -1,4 +1,36 @@
-body {
-    background-color: black;
-    color: aqua;
+html {
+    margin: 0;
+    border: 0;
+}
+
+nav {
+    width: 100vw;
+    font-family: 'Permanent Marker', cursive;
+    background-image: url('navbar.jpg');
+    background-size: auto;
+    height: 10vh;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    border: solid black 5px;
+    margin: .3em;
+    font-size: 1.6em;
+}
+
+.body {
+    margin: .3em;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 100vw;
+    height: 90vh;
+    background-image: url('searchimg.jpg');
+    background-size: cover;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }

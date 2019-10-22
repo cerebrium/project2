@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Authentication</title>
     <!-- Latest compiled and minified CSS & JS -->
+    <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <nav>       
+      <div><a href="/">HOME </a></div>
+      <div>|</div>
+      <div><a href="/profile">PROFILE </a></div>
+      <div>|</div>
+      <div><a href="/favourites">FAVOURITES </a></div>
+      <div>|</div>
+      <div><a href="/graphics">DISPLAY </a></div>
+    </nav>
     <div class="container">
       <% include partials/alerts %>
-        <a href="/">HOME |</a>
-        <a href="/profile">PROFILE |</a>
-      
-      <%- body %>
+      <div class='body'>
+        <%- body %>
+      </div>
     </div>
   </body>
 </html>
