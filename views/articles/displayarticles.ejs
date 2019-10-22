@@ -1,6 +1,11 @@
 <h1>articles</h1>
 <h3>Tweet: <%= tweet %></h3>
 <h4>By: <%= author %></h4>
+<form action="/favourites" method="POST">
+    <input type="hidden" name="tweet" value="<%= tweet %>">
+
+    <input type="submit" value="Save Tweet">
+</form>
 
 <% results[0][0].forEach(function(ele) { %>
     <% let newer = ele.toString().replace(/href="/, websites[0]) %>

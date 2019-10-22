@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   favourite.associate = function(models) {
     // associations can be defined here
+    models.favourite.hasMany(models.favarticle);
   };
   return favourite;
 };
