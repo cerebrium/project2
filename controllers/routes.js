@@ -22,22 +22,24 @@ const newsSites = [
 router.get('/displayarticles', function(req, res) {
     console.log('-------------------------------------------------------------------------------')
     console.log('req tweet: ' + req.query.tweet)
-    let searchstring = req.query.tweet.match(/Trump/)
+    let searchstring = req.query.tweet.match(/Trump/).toString()
+    let hrefSearch = searchstring.toLowerCase();
+    console.log('searchstring :' + searchstring)
     let newsName = 'breitbart';
     let async_One = function(cb) {
         axios.get(newsSites[0])
             .then(function(response) {
                 let newsArray = [];
                 let titleArray = [];
-                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
-                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
+                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
+                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
                 checkerTitle.forEach(function(ele) {
                     if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
+                    if (ele.includes(hrefSearch)) {
                         newsArray.push(ele);
                     }
                 })
@@ -52,15 +54,15 @@ router.get('/displayarticles', function(req, res) {
             .then(function(response) {
                 let newsArray = [];
                 let titleArray = [];
-                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
-                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
+                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
+                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
                 checkerTitle.forEach(function(ele) {
                     if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
+                    if (ele.includes(hrefSearch)) {
                         newsArray.push(ele);
                     }
                 })
@@ -74,15 +76,15 @@ router.get('/displayarticles', function(req, res) {
             .then(function(response) {
                 let newsArray = [];
                 let titleArray = [];
-                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
-                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
+                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
+                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
                 checkerTitle.forEach(function(ele) {
                     if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
+                    if (ele.includes(hrefSearch)) {
                         newsArray.push(ele);
                     }
                 })
@@ -96,15 +98,15 @@ router.get('/displayarticles', function(req, res) {
             .then(function(response) {
                 let newsArray = [];
                 let titleArray = [];
-                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
-                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
+                let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
+                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
                 checkerTitle.forEach(function(ele) {
                     if (ele.includes(searchstring)) {
                         titleArray.push(ele);
                     }
                 })
                 checkerHref.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
+                    if (ele.includes(hrefSearch)) {
                         newsArray.push(ele);
                     }
                 })
@@ -118,7 +120,7 @@ router.get('/displayarticles', function(req, res) {
         .then(function(response) {
             let newsArray = [];
             let titleArray = [];
-            let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/g);
+            let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
             let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
             checkerTitle.forEach(function(ele) {
                 if (ele.includes(searchstring)) {
@@ -126,7 +128,7 @@ router.get('/displayarticles', function(req, res) {
                 }
             })
             checkerHref.forEach(function(ele) {
-                if (ele.includes(searchstring)) {
+                if (ele.includes(hrefSearch)) {
                     newsArray.push(ele);
                 }
             })
@@ -135,6 +137,7 @@ router.get('/displayarticles', function(req, res) {
     }
 
     async.series([async_One, async_Two, async_Three, async_Four, async_Five], function(err, results) {
+        console.log(results)
         res.render('articles/displayarticles', {
             results : results,
             websites : newsSites,
@@ -157,6 +160,27 @@ router.get('/displayarticles', function(req, res) {
             console.log(err)
             res.redirect('/profile')
         })
+    })
+
+    router.post('/favourites', function(req, res) {
+        db.favourite.findOrCreate({
+            where : {
+                tweet = name
+            }
+        })
+        .then(function(favourite) {
+            favourite.createFavarticle({
+                where : {
+                    title : article
+                }
+            })
+        }).then(function([tweet, created]) {
+            created ? console.log(tweet) : console.log('already present')
+        })
+    })
+
+    router.get('/favourties', function(req, res) {
+        res.render('favourites/favourites')
     })
 
 module.exports = router;

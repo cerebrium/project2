@@ -1,34 +1,45 @@
 <h1>articles</h1>
 <h3>Tweet: <%= tweet %></h3>
 <h4>By: <%= author %></h4>
-<form action="/favourites" method="POST">
+<h5>Check to save article to tweet!</h5>
+<form action="compcoll/favourites" method="POST">
     <input type="hidden" name="tweet" value="<%= tweet %>">
 
-    <input type="submit" value="Save Tweet">
-</form>
-
-<% results[0][0].forEach(function(ele) { %>
+<% results[0][1].forEach(function(ele) { %>
     <% let newer = ele.toString().replace(/href="/, websites[0]) %>
+    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Breitbart: </p>
-    <p><a href="<%= newer %>"><%= newer %></a></p>
+    <p><%= titler %></p>
+    <input type="checkbox" name="article" value="<%= newer %>">
 <% }) %>
-<% results[1][0].forEach(function(ele) { %>
+<% results[1][1].forEach(function(ele) { %>
     <% let newer = ele.toString().replace(/href="/, websites[1]) %>
+    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>BBC: </p>
-    <p><a href="<%= newer %>"><%= newer %></a></p>
+    <p><%= titler %></p>
+    <input type="checkbox" name="article" value="<%= newer %>">
 <% }) %>
-<% results[2][0].forEach(function(ele) { %>
+<% results[2][1].forEach(function(ele) { %>
     <% let newer = ele.toString().replace(/href="/, websites[2]) %>
+    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>NYtimes: </p>
-    <p><a href="<%= newer %>"><%= newer %></a></p>
+    <p><%= titler %></p>
+    <input type="checkbox" name="article" value="<%= newer %>">
 <% }) %>
-<% results[3][0].forEach(function(ele) { %>
+<% results[3][1].forEach(function(ele) { %>
     <% let newer = ele.toString().replace(/href="/, '') %>
+    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Infowars: </p>
-    <p><a href="<%= newer %>"><%= newer %></a></p>
+    <p><%= titler %></p>
+    <input type="checkbox" name="article" value="<%= newer %>">
 <% }) %>
-<% results[4][0].forEach(function(ele) { %>
+<% results[4][1].forEach(function(ele) { %>
     <% let newer = ele.toString().replace(/href="/, websites[4]) %>
+    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Fox: </p>
-    <p><a href="<%= newer %>"><%= newer %></a></p>
+    <p><%= titler %></p>
+    <input type="checkbox" name="article" value="<%= newer %>">
 <% }) %>
+<br><br><br>
+    <input type="submit" value="Save to Favourites">
+</form>
