@@ -151,7 +151,6 @@ router.get('/displayarticles', function(req, res) {
         axios.get(`https://twitter.com/${req.query.inputtext}`)
         .then(function(results) {
             let checkerSpan = results.data.match(/<p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text" lang="en" data-aria-label-part="0">(\w|.)[^<]*/g);
-            console.log(checkerSpan)
             res.render('twitter/displaytwitter', {
                 results: checkerSpan,
                 person: req.query.inputtext
@@ -173,11 +172,9 @@ router.get('/displayarticles', function(req, res) {
                 tweet : req.body.tweet
             }
         })
-        .then(function(favourite) {
-            favourite.createFavarticle(req.body.article)
-        }).then(function([tweet, created]) {
-            created ? console.log(tweet) : console.log('already present')
-            res.redirect('/favourites')
+        .then(function([fav, created]) {
+            fav.createFavarticletwo(req.body.article)
+            res.redirect('/compcoll/favourites')
         })
     })
 
