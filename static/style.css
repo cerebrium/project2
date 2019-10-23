@@ -32,5 +32,26 @@ nav {
 
 a {
     text-decoration: none;
-    color: lightgrey;
+    color: white;
+}
+
+.submitform {
+    width: 15em;
+    height: 2.5em;
+    background-color: green;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#containertwo {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
 }

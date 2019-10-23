@@ -11,7 +11,7 @@
     <p>Breitbart: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>">
-    <input type="submit" value="Save Article">
+    <input type="submit" value="Save Article" class="submitform">
 <% } %>
 <% for (ele in results[1][1]) { %>
     <% let newer = results[1][0][ele].string.replace(/href="/, websites[1]) %>
@@ -19,7 +19,7 @@
     <p>BBC: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>">
-    <input type="submit" value="Save Article">
+    <input type="submit" value="Save Article" class="submitform">
 <% } %>
 <% for (ele in results[2][1]) { %>
     <% let newer = results[2][0][ele].string.replace(/href="/, websites[2]) %>
@@ -27,7 +27,7 @@
     <p>NYtimes: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>>">
-    <input type="submit" value="Save Article">
+    <input type="submit" value="Save Article" class="submitform">
 <% } %>
 <% for (ele in results[3][1]) { %>
     <% let newer = results[3][0][ele].string.replace(/href="/, websites[3]) %>
@@ -35,7 +35,7 @@
     <p>Infowars: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>>">
-    <input type="submit" value="Save Article">
+    <input type="submit" value="Save Article" class="submitform">
 <% } %>
 <% for (ele in results[4][1]) { %>
     <% let newer = results[4][0][ele].string.replace(/href="/, websites[4]) %>
@@ -43,7 +43,7 @@
     <p>Fox: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>>">
-    <input type="submit" value="Save Article">
+    <input type="submit" value="Save Article" class="submitform">
     
 <% } %>
 <br><br><br>

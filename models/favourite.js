@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const favourite = sequelize.define('favourite', {
-    tweet: DataTypes.STRING
+    tweet: DataTypes.TEXT
   }, {});
   favourite.associate = function(models) {
     // associations can be defined here

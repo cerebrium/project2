@@ -1,12 +1,17 @@
-<h1>This is what @<%= person %> is saying right now</h1>
+<div id="containertwo">
+    <h1>This is what @<%= person %> is saying right now</h1>
 
-<% results.forEach(function(ele) { %>
-<% let newer = ele.toString().replace(/<p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text" lang="en" data-aria-label-part="0">/, '') %>
-    <p><%= person %> Says: <%= newer %></p>
-    <form action="/compcoll/displayarticles" method="GET">
-        <input type="hidden" name="tweet" value="<%= newer %>">
-        <input type="hidden" name="person" value="<%= person %>">
-        <input type="submit" value="Search For Articles">
-    </form>
-<% }) %>
+    <% results.forEach(function(ele) { %>
+    <% let newer = ele.toString().replace(/<p class="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text" lang="en" data-aria-label-part="0">/, '') %>
+        <div>
+            <p><%= person %> Says: <%= newer %></p>
+            <form action="/compcoll/displayarticles" method="GET">
+                <input type="hidden" name="tweet" value="<%= newer %>">
+                <input type="hidden" name="person" value="<%= person %>">
+                <input type="submit" value="Search For Articles" class="submitform">
+            </form>
+        </div>
+        <hr>
+    <% }) %>
+</div>
 
