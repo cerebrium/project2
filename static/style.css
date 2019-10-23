@@ -3,6 +3,10 @@ html {
     border: 0;
 }
 
+body {
+    background-color: lightslategray;
+}
+
 nav {
     width: 97vw;
     font-family: 'Permanent Marker', cursive;
@@ -52,6 +56,9 @@ a {
 #containertwo {
     display: flex;
     flex-flow: column;
-    align-items: center;
     justify-content: center;
+}
+
+h1 {
+    align-content: center;
 }
