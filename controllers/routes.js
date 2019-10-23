@@ -113,7 +113,8 @@ router.get('/displayarticles', function(req, res) {
                 let newsObj = {};
                 let titleObj = {};
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
-                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
+                let checkerTitle = response.data.match(/<h3 class="gs-c-promo-heading__title gel-pica-bold nw-o-link-split__text">(\w|.)[^<]*/gi);
+                console.log(checkerTitle)
                 comparisonGenerator(checkerHref, myTweet);
                 newsObj = myGrandObject;
                 comparisonGenerator(checkerTitle, myTweet);
@@ -144,7 +145,7 @@ router.get('/displayarticles', function(req, res) {
                 let newsObj = {};
                 let titleObj = {};
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
-                let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
+                let checkerTitle = response.data.match(/<h2 class="css-1j9dxys e1xfvim30">(\w|.)[^<]*/gi);
                 comparisonGenerator(checkerHref, myTweet);
                 newsObj = myGrandObject;
                 comparisonGenerator(checkerTitle, myTweet);

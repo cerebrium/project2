@@ -15,7 +15,7 @@
 <% } %>
 <% for (ele in results[1][1]) { %>
     <% let newer = results[1][0][ele].string.replace(/href="/, websites[1]) %>
-    <% let titler = results[1][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+    <% let titler = results[1][1][ele].string.replace(/<h3 class="gs-c-promo-heading__title gel-pica-bold nw-o-link-split__text">|([\d|.|&|#|:|;])*/g, '') %>
     <p>BBC: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>">
@@ -23,7 +23,7 @@
 <% } %>
 <% for (ele in results[2][1]) { %>
     <% let newer = results[2][0][ele].string.replace(/href="/, websites[2]) %>
-    <% let titler = results[2][1][ele].string.replace(/|title=|([\d|.|&|#|:|;])*/g, '') %>
+    <% let titler = results[2][1][ele].string.replace(/<h2 class="css-1j9dxys e1xfvim30">|([\d|.|&|#|:|;])*/g, '') %>
     <p>NYtimes: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>>">
