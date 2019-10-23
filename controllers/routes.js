@@ -22,7 +22,7 @@ const newsSites = [
 router.get('/displayarticles', function(req, res) {
     console.log('-------------------------------------------------------------------------------')
     console.log('req tweet: ' + req.query.tweet)
-    let searchstring = req.query.tweet.match(/Trump/).toString()
+    let searchstring = req.query.tweet.match(/[Trump|Hillary|Truth|Pelosi]/).toString()
     let hrefSearch = searchstring.toLowerCase();
     console.log('searchstring :' + searchstring)
     let newsName = 'breitbart';
@@ -162,21 +162,36 @@ router.get('/displayarticles', function(req, res) {
     })
 
     router.get('/favourites', function(req, res) {
-        res.render('favourites/favourites')
+        db.favourite.findAll()
+        .then(function(tweets) {
+            db.favarticletwo.findAll()
+            .then(function(articles) {
+                console.log('favourites are: ' + tweets.tweet)
+                console.log('favarts are: ' + articles.title)
+                res.render('favourites/favourites', {
+                    articles, tweets
+                })
+            })
+        })
     })
 
     router.post('/favourites', function(req, res) {
-        console.log(req.body)
+        console.log('inside favourites for each --------------------------------')
         db.favourite.findOrCreate({
             where : {
                 tweet : req.body.tweet
             }
         })
-        .then(function([fav, created]) {
-            fav.createFavarticletwo(req.body.article)
-            res.redirect('/compcoll/favourites')
+        .then(function([favourite, created]) {
+            favourite.createFavarticletwo({
+                title : req.body.article
+            }).then(function(data) {
+                console.log('------------------------------------------------------------------')
+                console.log(req.body.article)
+                res.redirect('/compcoll/favourites')
         })
     })
+})
 
 
 module.exports = router;
