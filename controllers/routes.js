@@ -22,7 +22,7 @@ const newsSites = [
 router.get('/displayarticles', function(req, res) {
     console.log('-------------------------------------------------------------------------------')
     console.log('req tweet: ' + req.query.tweet)
-    let searchstring = req.query.tweet.match(/[Trump|Hillary|Truth|Pelosi]/).toString()
+    let searchstring = req.query.tweet.match(/[Trump|Hillary|Pelosi]/).toString()
     let hrefSearch = searchstring.toLowerCase();
     console.log('searchstring :' + searchstring)
     let newsName = 'breitbart';
@@ -166,10 +166,10 @@ router.get('/displayarticles', function(req, res) {
         .then(function(tweets) {
             db.favarticletwo.findAll()
             .then(function(articles) {
-                console.log('favourites are: ' + tweets.tweet)
-                console.log('favarts are: ' + articles.title)
+                console.log('favourites are: ' + tweets)
+                console.log('favarts are: ' + articles)
                 res.render('favourites/favourites', {
-                    articles, tweets
+                    tweets, articles
                 })
             })
         })
@@ -183,13 +183,23 @@ router.get('/displayarticles', function(req, res) {
             }
         })
         .then(function([favourite, created]) {
-            favourite.createFavarticletwo({
-                title : req.body.article
-            }).then(function(data) {
+            if (Array.isArray(req.body.article)) {
+            req.body.article.forEach(function(ele) {
+                favourite.createFavarticletwo({
+                    title : ele
+                }).then(function(data) {
+            })
                 console.log('------------------------------------------------------------------')
                 console.log(req.body.article)
                 res.redirect('/compcoll/favourites')
         })
+    } else {
+        favourite.createFavarticletwo({
+            title : req.body.article
+        }).then(function(data) {
+            res.redirect('/compcoll/favourites')
+        })
+    }
     })
 })
 
