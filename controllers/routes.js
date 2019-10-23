@@ -256,13 +256,24 @@ router.get('/displayarticles', function(req, res) {
 
     router.post('/favourites/delete', function(req, res){
         console.log('Tweet to delete -------------------' + req.body.tweet)
-        db.favourite.destroy({
+        db.favourite.findOne({
             where : {
                 tweet : req.body.deleteTweet
             }
         }).then(function(deleter) {
-            favourite.getFavarticletwos().then(function(articles) {
-                articles.destry()
+            deleter.getFavarticletwos().then(function(articles) {
+                console.log(deleter)
+                db.favarticletwo.destroy({
+                    where : {
+                        favouriteId : deleter.id
+                    }
+                })
+            }).then(function(articlefav) {
+                db.favourite.destroy({
+                    where : {
+                        tweet : req.body.deleteTweet
+                    }
+                })
             })
         })
         .then(function(response) {

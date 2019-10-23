@@ -4,7 +4,7 @@ html {
 }
 
 nav {
-    width: 100vw;
+    width: 97vw;
     font-family: 'Permanent Marker', cursive;
     background-image: url('navbar.jpg');
     background-size: auto;
@@ -18,7 +18,7 @@ nav {
     margin: .3em;
     font-size: 1.6em;
 }
-
+/* 
 .body {
     margin: .3em;
     display: flex;
@@ -28,9 +28,9 @@ nav {
     height: 90vh;
     background-image: url('searchimg.jpg');
     background-size: cover;
-}
+} */
 
 a {
     text-decoration: none;
-    color: white;
+    color: lightgrey;
 }

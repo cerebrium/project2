@@ -10,7 +10,7 @@
     <% let titler = results[0][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Breitbart: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="article" value="<%= newer %>">
+    <input type="checkbox" name="article" value="<%= titler %>">
     <input type="submit" value="Save Article">
 <% } %>
 <% for (ele in results[1][1]) { %>
@@ -18,7 +18,7 @@
     <% let titler = results[1][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>BBC: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articleb" value="<%= newer %>">
+    <input type="checkbox" name="article" value="<%= titler %>">
     <input type="submit" value="Save Article">
 <% } %>
 <% for (ele in results[2][1]) { %>
@@ -26,15 +26,15 @@
     <% let titler = results[2][1][ele].string.replace(/|title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>NYtimes: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articlec" value="<%= newer %>>">
+    <input type="checkbox" name="article" value="<%= titler %>>">
     <input type="submit" value="Save Article">
 <% } %>
 <% for (ele in results[3][1]) { %>
-    <% let newer = results[3][0][ele].string.replace(/href="/, '') %>
+    <% let newer = results[3][0][ele].string.replace(/href="/, websites[3]) %>
     <% let titler = results[3][1][ele].string.replace(/"Permanent Link to|title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Infowars: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articled" value="<%= newer %>>">
+    <input type="checkbox" name="article" value="<%= titler %>>">
     <input type="submit" value="Save Article">
 <% } %>
 <% for (ele in results[4][1]) { %>
@@ -42,7 +42,7 @@
     <% let titler = results[4][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Fox: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articlee" value="<%= newer %>>">
+    <input type="checkbox" name="article" value="<%= titler %>>">
     <input type="submit" value="Save Article">
     
 <% } %>
