@@ -231,7 +231,6 @@ router.get('/displayarticles', function(req, res) {
     }
 
     async.series([async_One, async_Two, async_Three, async_Four, async_Five], function(err, results) {
-        console.log(results)
         res.render('articles/displayarticles', {
             results : results,
             websites : newsSites,
@@ -252,6 +251,22 @@ router.get('/displayarticles', function(req, res) {
         }).catch(function(err) {
             console.log(err)
             res.redirect('/profile')
+        })
+    })
+
+    router.post('/favourites/delete', function(req, res){
+        console.log('Tweet to delete -------------------' + req.body.tweet)
+        db.favourite.destroy({
+            where : {
+                tweet : req.body.deleteTweet
+            }
+        }).then(function(deleter) {
+            favourite.getFavarticletwos().then(function(articles) {
+                articles.destry()
+            })
+        })
+        .then(function(response) {
+            res.redirect('/compcoll/favourites')
         })
     })
 

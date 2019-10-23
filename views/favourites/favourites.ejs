@@ -2,6 +2,10 @@
 <h2>Tweets: </h2>
 <% tweets.forEach(function(ele) { %>
     <p><%= ele.tweet %></p>
+    <form action="/compcoll/favourites/delete" method="POST">
+        <input type="hidden" value="<%= ele.tweet %>" name="deleteTweet">
+        <input type="submit" value="Delete">
+    </form>
 <% }) %>
 
 <h2>Articles</h2>

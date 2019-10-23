@@ -4,7 +4,6 @@
 <h5>Check to save article to tweet!</h5>
 <form action="/compcoll/favourites" method="POST">
     <input type="hidden" name="tweet" value="<%= tweet %>">
-</form>
 
 <% for (ele in results[0][1]) { %>
     <% let newer = results[0][0][ele].string.replace(/href="/, websites[0]) %>
