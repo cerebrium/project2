@@ -20,9 +20,50 @@ const newsSites = [
 //     })
 
 router.get('/displayarticles', function(req, res) {
+    let myTweet = req.query.tweet;
+
+    //COMPARISON CODE
+    let comparison = function(myStringOne, myStringTwo) {
+        let myArrayOne = myStringOne.split(' ');
+        let myArrayTwo = myStringTwo.split(' ');
+        let matchingArry = [];
+        let matchValue = 0;
+        for (a=0; a < myArrayOne.length; a++) {
+        for (b=0; b < myArrayTwo.length; b++) {
+            if (myArrayOne[a] === myArrayTwo[b]) {
+            matchingArry.push(myArrayOne[a])
+            matchingArry.forEach(function(ele) {
+                matchValue += ele.length
+            })
+            }  
+            if (myGrandObject.match1.value < matchValue) {
+            myGrandObject.match1.value = matchValue;
+            myGrandObject.match1.string = myStringTwo;
+            } else if (myGrandObject.match2.value < matchValue) {
+            myGrandObject.match2.value = matchValue;
+            myGrandObject.match2.string = myStringTwo;
+            } else if (myGrandObject.match3.value < matchValue) {
+            myGrandObject.match3.value = matchValue;
+            myGrandObject.match3.string = myStringTwo;
+            }
+        } 
+        }
+    };
+    
+    const comparisonGenerator = function(arr, myStringOne) {
+        for (let i=0; i<arr.length; i++) {
+        comparison(myStringOne, arr[i])
+        }
+        console.log(myGrandObject)
+    };
+    
+    comparisonGenerator(newArray, string1);
+
+
+      // end of comparison code
     console.log('-------------------------------------------------------------------------------')
     console.log('req tweet: ' + req.query.tweet)
-    let searchstring = req.query.tweet.match(/[Trump|Hillary|Pelosi]/).toString()
+    let searchstring = req.query.tweet.match(/[Trump|Hillary|Pelosi|[cC]onservative[sS]?]/).toString()
     let hrefSearch = searchstring.toLowerCase();
     console.log('searchstring :' + searchstring)
     let newsName = 'breitbart';
