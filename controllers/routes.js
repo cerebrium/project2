@@ -22,8 +22,22 @@ const newsSites = [
 router.get('/displayarticles', function(req, res) {
     let myTweet = req.query.tweet;
 
+    let myGrandObject = {
+        match1 : {
+        value : 0,
+        string : '',
+        },
+        match2 : {
+        value : 0,
+        string : '',
+        },
+        match3 : {
+        value : 0,
+        string : '',
+        }
+    }
     //COMPARISON CODE
-    let comparison = function(myStringOne, myStringTwo) {
+    let comparison = function(myStringTwo, myStringOne) {
         let myArrayOne = myStringOne.split(' ');
         let myArrayTwo = myStringTwo.split(' ');
         let matchingArry = [];
@@ -35,57 +49,60 @@ router.get('/displayarticles', function(req, res) {
             matchingArry.forEach(function(ele) {
                 matchValue += ele.length
             })
-            }  
-            if (myGrandObject.match1.value < matchValue) {
-            myGrandObject.match1.value = matchValue;
-            myGrandObject.match1.string = myStringTwo;
-            } else if (myGrandObject.match2.value < matchValue) {
-            myGrandObject.match2.value = matchValue;
-            myGrandObject.match2.string = myStringTwo;
-            } else if (myGrandObject.match3.value < matchValue) {
-            myGrandObject.match3.value = matchValue;
-            myGrandObject.match3.string = myStringTwo;
-            }
-        } 
+                if (myGrandObject.match1.value < matchValue) {
+                myGrandObject.match1.value = matchValue;
+                myGrandObject.match1.string = myStringTwo;
+                } else if (myGrandObject.match2.value < matchValue) {
+                myGrandObject.match2.value = matchValue;
+                myGrandObject.match2.string = myStringTwo;
+                } else if (myGrandObject.match3.value < matchValue) {
+                myGrandObject.match3.value = matchValue;
+                myGrandObject.match3.string = myStringTwo;
+                }
+                }  
+            } 
         }
     };
     
     const comparisonGenerator = function(arr, myStringOne) {
         for (let i=0; i<arr.length; i++) {
-        comparison(myStringOne, arr[i])
+        comparison(arr[i], myStringOne)
         }
-        console.log(myGrandObject)
     };
     
-    comparisonGenerator(newArray, string1);
 
 
       // end of comparison code
     console.log('-------------------------------------------------------------------------------')
     console.log('req tweet: ' + req.query.tweet)
-    let searchstring = req.query.tweet.match(/[Trump|Hillary|Pelosi|[cC]onservative[sS]?]/).toString()
-    let hrefSearch = searchstring.toLowerCase();
-    console.log('searchstring :' + searchstring)
     let newsName = 'breitbart';
     let async_One = function(cb) {
         axios.get(newsSites[0])
             .then(function(response) {
-                let newsArray = [];
-                let titleArray = [];
+                let newsObj = {};
+                let titleObj = {};
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
-                checkerTitle.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
-                        titleArray.push(ele);
+                comparisonGenerator(checkerHref, myTweet);
+                newsObj = myGrandObject;
+                comparisonGenerator(checkerTitle, myTweet);
+                titleObj = myGrandObject;
+
+                cb(null, newsObj, titleObj, newsName)
+                myGrandObject = {
+                    match1 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match2 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match3 : {
+                    value : 0,
+                    string : '',
                     }
-                })
-                checkerHref.forEach(function(ele) {
-                    if (ele.includes(hrefSearch)) {
-                        newsArray.push(ele);
-                    }
-                })
-                
-                cb(null, newsArray, titleArray, newsName)
+                }
             })
     }
 
@@ -93,21 +110,30 @@ router.get('/displayarticles', function(req, res) {
         let newsName = 'bbc';
         axios.get(newsSites[1])
             .then(function(response) {
-                let newsArray = [];
-                let titleArray = [];
+                let newsObj = {};
+                let titleObj = {};
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
-                checkerTitle.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
-                        titleArray.push(ele);
+                comparisonGenerator(checkerHref, myTweet);
+                newsObj = myGrandObject;
+                comparisonGenerator(checkerTitle, myTweet);
+                titleObj = myGrandObject;
+
+                cb(null, newsObj, titleObj, newsName)
+                myGrandObject = {
+                    match1 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match2 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match3 : {
+                    value : 0,
+                    string : '',
                     }
-                })
-                checkerHref.forEach(function(ele) {
-                    if (ele.includes(hrefSearch)) {
-                        newsArray.push(ele);
-                    }
-                })
-                cb(null, newsArray, titleArray, newsName)
+                }
             })
     }
 
@@ -115,21 +141,30 @@ router.get('/displayarticles', function(req, res) {
         let newsName = 'nytimes';
         axios.get(newsSites[2])
             .then(function(response) {
-                let newsArray = [];
-                let titleArray = [];
+                let newsObj = {};
+                let titleObj = {};
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
-                checkerTitle.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
-                        titleArray.push(ele);
+                comparisonGenerator(checkerHref, myTweet);
+                newsObj = myGrandObject;
+                comparisonGenerator(checkerTitle, myTweet);
+                titleObj = myGrandObject;
+
+                cb(null, newsObj, titleObj, newsName)
+                myGrandObject = {
+                    match1 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match2 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match3 : {
+                    value : 0,
+                    string : '',
                     }
-                })
-                checkerHref.forEach(function(ele) {
-                    if (ele.includes(hrefSearch)) {
-                        newsArray.push(ele);
-                    }
-                })
-                cb(null, newsArray, titleArray, newsName)
+                }
             })
     }
 
@@ -137,21 +172,30 @@ router.get('/displayarticles', function(req, res) {
         let newsName = 'infowars';
         axios.get(newsSites[3])
             .then(function(response) {
-                let newsArray = [];
-                let titleArray = [];
+                let newsObj = {};
+                let titleObj = {};
                 let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
                 let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/gi);
-                checkerTitle.forEach(function(ele) {
-                    if (ele.includes(searchstring)) {
-                        titleArray.push(ele);
+                comparisonGenerator(checkerHref, myTweet);
+                newsObj = myGrandObject;
+                comparisonGenerator(checkerTitle, myTweet);
+                titleObj = myGrandObject;
+
+                cb(null, newsObj, titleObj, newsName)
+                myGrandObject = {
+                    match1 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match2 : {
+                    value : 0,
+                    string : '',
+                    },
+                    match3 : {
+                    value : 0,
+                    string : '',
                     }
-                })
-                checkerHref.forEach(function(ele) {
-                    if (ele.includes(hrefSearch)) {
-                        newsArray.push(ele);
-                    }
-                })
-                cb(null, newsArray, titleArray, newsName)
+                }
             })
     }
 
@@ -159,21 +203,30 @@ router.get('/displayarticles', function(req, res) {
         let newsName = 'foxnews';
         axios.get(newsSites[4])
         .then(function(response) {
-            let newsArray = [];
-            let titleArray = [];
+            let newsObj = {};
+            let titleObj = {};
             let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
             let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
-            checkerTitle.forEach(function(ele) {
-                if (ele.includes(searchstring)) {
-                    titleArray.push(ele);
+            comparisonGenerator(checkerHref, myTweet);
+                newsObj = myGrandObject;
+                comparisonGenerator(checkerTitle, myTweet);
+                titleObj = myGrandObject;
+
+            cb(null, newsObj, titleObj, newsName)
+            myGrandObject = {
+                match1 : {
+                value : 0,
+                string : '',
+                },
+                match2 : {
+                value : 0,
+                string : '',
+                },
+                match3 : {
+                value : 0,
+                string : '',
                 }
-            })
-            checkerHref.forEach(function(ele) {
-                if (ele.includes(hrefSearch)) {
-                    newsArray.push(ele);
-                }
-            })
-            cb(null, newsArray, titleArray, newsName)
+            }
         })
     }
 

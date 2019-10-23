@@ -4,46 +4,48 @@
 <h5>Check to save article to tweet!</h5>
 <form action="/compcoll/favourites" method="POST">
     <input type="hidden" name="tweet" value="<%= tweet %>">
+</form>
 
-<% results[0][1].forEach(function(ele) { %>
-    <% let newer = ele.toString().replace(/href="/, websites[0]) %>
-    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+<% for (ele in results[0][1]) { %>
+    <% let newer = results[0][0][ele].string.replace(/href="/, websites[0]) %>
+    <% let titler = results[0][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Breitbart: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="article" value="<%= ele %>">
+    <input type="checkbox" name="article" value="<%= newer %>">
     <input type="submit" value="Save Article">
-<% }) %>
-<% results[1][1].forEach(function(ele) { %>
-    <% let newer = ele.toString().replace(/href="/, websites[1]) %>
-    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+<% } %>
+<% for (ele in results[1][1]) { %>
+    <% let newer = results[1][0][ele].string.replace(/href="/, websites[1]) %>
+    <% let titler = results[1][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>BBC: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articleb" value="<%= ele %>">
+    <input type="checkbox" name="articleb" value="<%= newer %>">
     <input type="submit" value="Save Article">
-<% }) %>
-<% results[2][1].forEach(function(ele) { %>
-    <% let newer = ele.toString().replace(/href="/, websites[2]) %>
-    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+<% } %>
+<% for (ele in results[2][1]) { %>
+    <% let newer = results[2][0][ele].string.replace(/href="/, websites[2]) %>
+    <% let titler = results[2][1][ele].string.replace(/|title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>NYtimes: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articlec" value="<%= ele %>>">
+    <input type="checkbox" name="articlec" value="<%= newer %>>">
     <input type="submit" value="Save Article">
-<% }) %>
-<% results[3][1].forEach(function(ele) { %>
-    <% let newer = ele.toString().replace(/href="/, '') %>
-    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+<% } %>
+<% for (ele in results[3][1]) { %>
+    <% let newer = results[3][0][ele].string.replace(/href="/, '') %>
+    <% let titler = results[3][1][ele].string.replace(/"Permanent Link to|title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Infowars: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articled" value="<%= ele %>>">
+    <input type="checkbox" name="articled" value="<%= newer %>>">
     <input type="submit" value="Save Article">
-<% }) %>
-<% results[4][1].forEach(function(ele) { %>
-    <% let newer = ele.toString().replace(/href="/, websites[4]) %>
-    <% let titler = ele.toString().replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+<% } %>
+<% for (ele in results[4][1]) { %>
+    <% let newer = results[4][0][ele].string.replace(/href="/, websites[4]) %>
+    <% let titler = results[4][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
     <p>Fox: </p>
     <p><%= titler %></p>
-    <input type="checkbox" name="articlee" value="<%= ele %>>">
+    <input type="checkbox" name="articlee" value="<%= newer %>>">
+    <input type="submit" value="Save Article">
     
-<% }) %>
+<% } %>
 <br><br><br>
 </form>
