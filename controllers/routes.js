@@ -207,7 +207,7 @@ router.get('/displayarticles', function(req, res) {
             let newsObj = {};
             let titleObj = {};
             let checkerHref = response.data.match(/href="(\w|.)[^"]*"{1}/gi);
-            let checkerTitle = response.data.match(/title="(\w|.)[^"]*"{1}/g);
+            let checkerTitle = response.data.match(/<h2 class="title"><(\w|.[^<])*/gi);
             comparisonGenerator(checkerHref, myTweet);
                 newsObj = myGrandObject;
                 comparisonGenerator(checkerTitle, myTweet);

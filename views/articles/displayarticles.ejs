@@ -39,7 +39,7 @@
 <% } %>
 <% for (ele in results[4][1]) { %>
     <% let newer = results[4][0][ele].string.replace(/href="/, websites[4]) %>
-    <% let titler = results[4][1][ele].string.replace(/title=|([\d|.|&|#|:|;])*/g, '') %>
+    <% let titler = results[4][1][ele].string.replace(/<h2 class="title"><a href="\/politics\/|(\w*-\w*)|">|([\d|.|&|#|:|;])*<\/a/g, '') %>
     <p>Fox: </p>
     <p><%= titler %></p>
     <input type="checkbox" name="article" value="<%= titler %>>">
