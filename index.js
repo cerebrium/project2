@@ -11,6 +11,7 @@ const helmet = require('helmet');
 const db = require('./models')
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const RateLimit = require('express-rate-limit');
+const methodOverride = require('method-override')
 
 // middleware
 app.set('view engine', 'ejs');
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(ejsLayouts);
 app.use(helmet());
+app.use(methodOverride('_method'));
 
 // have ot make limiters
 // const loginLimiter = new RateLimit({

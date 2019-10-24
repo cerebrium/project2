@@ -324,5 +324,18 @@ router.get('/displayarticles', function(req, res) {
     })
 })
 
+    router.put('/favourites/edit/:id', function(req, res) {
+        db.favarticletwo.update({
+            title : req.body.editEle
+        },
+        {
+            where : {   
+                id : req.params.id
+            }
+        }).then(function(result) {
+            res.redirect('/compcoll/favourites')
+        })
+    })
+
 
 module.exports = router;

@@ -12,4 +12,8 @@
 <h2>Articles</h2>
 <% articles.forEach(function(ele) { %>
     <p><%= ele.title %></p>
+    <form action="/compcoll/favourites/edit/<%= ele.id %>/?_method=PUT" method="POST">
+        <input type="text" name="editEle" value="Discard">
+        <input type="submit" value="Discard">
+    </form>
 <% }) %>
