@@ -83,6 +83,7 @@ a {
     display: flex;
     flex-flow: column;
     justify-content: center;
+    overflow: scroll;
 }
 
 h1 {
