@@ -30,6 +30,25 @@ h2{
     text-align: center;
 }
 
+.loginPage {
+    display: flex;
+    padding-right: 2%;
+    justify-content: space-evenly;
+    width: 80vh;
+}
+button {
+    height: 5vh;
+    width: 10vh;
+    margin-bottom: 5%;
+}
+.dontShowThis {
+    opacity: 0;
+}
+
+.showThis{
+    opacity: 1;
+}
+
 .body {
     margin: .3em;
     display: flex;
