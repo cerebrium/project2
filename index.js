@@ -11,14 +11,14 @@ const helmet = require('helmet');
 const db = require('./models');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const RateLimit = require('express-rate-limit');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 
 // middleware
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use(express.static('public'));
 app.use(ejsLayouts);
 app.use(helmet());
 app.use(methodOverride('_method'));
@@ -41,15 +41,15 @@ app.use(methodOverride('_method'));
 
 const sessionStore = new SequelizeStore({
   db: db.sequelize,
-  expiration: 1000 * 60 * 30,
-})
+  expiration: 1000 * 60 * 30
+});
 
 // session must come before flash and passport
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  store: sessionStore,
+  store: sessionStore
 }));
 
 // Use this line once to set up store table
@@ -79,7 +79,9 @@ app.get('/profile', isLoggedIn, function(req, res) {
 });
 
 app.use('/auth', require('./controllers/auth'));
-app.use(`/compcoll`, require(`./controllers/routes`))
+app.use('/compcoll', isLoggedIn, function(req, res) {
+  res.render('./controllers/routes');
+});
 
 var server = app.listen(process.env.PORT || 3000);
 
